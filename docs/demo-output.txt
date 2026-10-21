@@ -1,0 +1,16 @@
+SAME DELIVERY: Delivery[distanceKm=10, weightGrams=1500, urgent=false]; wind = 10 km/h
+distance price = 1700 minor units
+payload price = 1200 minor units
+energy price = 900 minor units
+Manual payload = 1200
+Same context, automatic = 1700
+Same context, switched to energy = 900
+Automatic strong-wind price = 1300
+SAME FLEET: [Drone[id=A, capacityGrams=5000, pickupKm=1, rangeKm=100, idleMinutes=10, available=true], Drone[id=B, capacityGrams=2000, pickupKm=4, rangeKm=100, idleMinutes=20, available=true], Drone[id=C, capacityGrams=4000, pickupKm=3, rangeKm=100, idleMinutes=90, available=true]]
+nearest selects A
+best-fit selects B
+idle selects C
+Manual nearest = A
+Same context, automatic = C
+Same context, switched to best-fit = B
+Empty fleet = Optional.empty

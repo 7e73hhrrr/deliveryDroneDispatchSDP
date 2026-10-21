@@ -1,0 +1,103 @@
+@startuml
+!pragma layout smetana
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam linetype ortho
+hide empty members
+package "Delivery data" #FFF2D5 {
+  class Delivery <<record>> {
+    +distanceKm: int
+    +weightGrams: int
+    +urgent: boolean
+  }
+  class Drone <<record>> {
+    +id: String
+    +capacityGrams: int
+    +pickupKm: int
+    +rangeKm: int
+    +idleMinutes: int
+    +available: boolean
+  }
+}
+package "Pricing family" #E8F1FF {
+  interface PricingStrategy {
+    +quote(delivery: Delivery): long
+  }
+  class PricingContext {
+    -strategy: PricingStrategy
+    +PricingContext(strategy: PricingStrategy)
+    +setStrategy(strategy: PricingStrategy): void
+    +quote(delivery: Delivery): long
+  }
+  class DistancePricing
+  class PayloadBandPricing
+  class WeatherEnergyPricing
+  class PricingSelector {
+    +manual(key: String): PricingStrategy
+    +automatic(delivery: Delivery): PricingStrategy
+  }
+  class PricingService {
+    +quote(mode: String, delivery: Delivery): long
+  }
+  PricingContext o--> PricingStrategy
+  PricingStrategy <|.. DistancePricing
+  PricingStrategy <|.. PayloadBandPricing
+  PricingStrategy <|.. WeatherEnergyPricing
+  PricingSelector ..> PricingStrategy : selects
+  PricingService --> PricingSelector
+  PricingService ..> PricingContext : creates
+}
+package "Assignment family" #E5F6EF {
+  interface DroneAssignmentStrategy {
+    +assign(delivery: Delivery, fleet: List): Optional<Drone>
+  }
+  class DroneAssignmentContext {
+    -strategy: DroneAssignmentStrategy
+    +DroneAssignmentContext(strategy: DroneAssignmentStrategy)
+    +setStrategy(strategy: DroneAssignmentStrategy): void
+    +assign(delivery: Delivery, fleet: List): Optional<Drone>
+  }
+  class NearestDroneStrategy
+  class BestFitPayloadStrategy
+  class LongestIdleStrategy
+  class DroneEligibility
+  class DroneAssignmentSelector {
+    +manual(key: String): DroneAssignmentStrategy
+    +automatic(delivery: Delivery): DroneAssignmentStrategy
+  }
+  DroneAssignmentContext o--> DroneAssignmentStrategy
+  DroneAssignmentStrategy <|.. NearestDroneStrategy
+  DroneAssignmentStrategy <|.. BestFitPayloadStrategy
+  DroneAssignmentStrategy <|.. LongestIdleStrategy
+  DroneAssignmentSelector ..> DroneAssignmentStrategy : selects
+  NearestDroneStrategy ..> DroneEligibility
+  BestFitPayloadStrategy ..> DroneEligibility
+  LongestIdleStrategy ..> DroneEligibility
+}
+package "External data" #FFE8ED {
+  interface WeatherSource {
+    +windKmh(): int
+  }
+  class SimulatedWeatherSource
+  class FakeWeatherSource <<test record>>
+  WeatherSource <|.. SimulatedWeatherSource
+  WeatherSource <|.. FakeWeatherSource
+}
+class "SelectionRule<S>" as Rule <<record>> {
+  +condition: Predicate<Delivery>
+  +strategy: S
+}
+class Demo
+WeatherEnergyPricing --> WeatherSource
+PricingSelector ..> WeatherSource
+PricingSelector o--> Rule
+DroneAssignmentSelector o--> Rule
+PricingStrategy ..> Delivery
+DroneAssignmentStrategy ..> Delivery
+DroneEligibility ..> Drone
+Demo ..> PricingSelector
+Demo ..> PricingContext
+Demo ..> DroneAssignmentSelector
+Demo ..> DroneAssignmentContext
+@enduml

@@ -1,0 +1,93 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+╷
+├─ JUnit Platform Suite ✔
+├─ JUnit Jupiter ✔
+│  ├─ PricingStrategiesTest ✔
+│  │  ├─ payloadChargesStartedKilogramRegardlessOfDistance() ✔
+│  │  ├─ pricesStayNonnegativeAcrossInputBoundaries(PricingStrategy) ✔
+│  │  │  ├─ [1] com.dronedispatch.pricing.DistancePricing@72bc6553 ✔
+│  │  │  ├─ [2] com.dronedispatch.pricing.PayloadBandPricing@2dfaea86 ✔
+│  │  │  └─ [3] com.dronedispatch.pricing.WeatherEnergyPricing@15888343 ✔
+│  │  ├─ rejectsInvalidExternalObservation() ✔
+│  │  ├─ rejectsNullDelivery(PricingStrategy) ✔
+│  │  │  ├─ [1] com.dronedispatch.pricing.DistancePricing@c05fddc ✔
+│  │  │  ├─ [2] com.dronedispatch.pricing.PayloadBandPricing@4d15107f ✔
+│  │  │  └─ [3] com.dronedispatch.pricing.WeatherEnergyPricing@7b4c50bc ✔
+│  │  ├─ weatherIsReadAtExecutionTime() ✔
+│  │  ├─ energyCombinesDistancePayloadAndExternalWind() ✔
+│  │  └─ distanceChargesPerKilometreRegardlessOfPayload() ✔
+│  ├─ DroneAssignmentSelectorTest ✔
+│  │  ├─ newPolicyCanBeRegisteredWithoutEditingExistingClasses() ✔
+│  │  ├─ automaticRulesIncludeBoundariesAndPriority(boolean, int, String) ✔
+│  │  │  ├─ [1] false, 2999, idle ✔
+│  │  │  ├─ [2] false, 3000, best-fit ✔
+│  │  │  ├─ [3] true, 2999, nearest ✔
+│  │  │  ├─ [4] true, 3000, nearest ✔
+│  │  │  └─ [5] true, 20000, nearest ✔
+│  │  └─ manualChoicesAndUnknownKeys() ✔
+│  ├─ DroneAssignmentStrategiesTest ✔
+│  │  ├─ contextSwitchesAtRuntime() ✔
+│  │  ├─ emptyOrIneligibleFleetHasNoAssignment(DroneAssignmentStrategy) ✔
+│  │  │  ├─ [1] com.dronedispatch.assignment.NearestDroneStrategy@7905a0b8 ✔
+│  │  │  ├─ [2] com.dronedispatch.assignment.BestFitPayloadStrategy@35a3d49f ✔
+│  │  │  └─ [3] com.dronedispatch.assignment.LongestIdleStrategy@389b0789 ✔
+│  │  ├─ bestFitMinimizesUnusedCapacity() ✔
+│  │  ├─ nearestMinimizesPickupDistance() ✔
+│  │  ├─ tiesUseLexicalIdRegardlessOfInputOrder(DroneAssignmentStrategy) ✔
+│  │  │  ├─ [1] com.dronedispatch.assignment.NearestDroneStrategy@13d9cbf5 ✔
+│  │  │  ├─ [2] com.dronedispatch.assignment.BestFitPayloadStrategy@2663e964 ✔
+│  │  │  └─ [3] com.dronedispatch.assignment.LongestIdleStrategy@48b67364 ✔
+│  │  ├─ filtersUnavailableOverloadedAndOutOfRangeDrones(DroneAssignmentStrategy) ✔
+│  │  │  ├─ [1] com.dronedispatch.assignment.NearestDroneStrategy@189cbd7c ✔
+│  │  │  ├─ [2] com.dronedispatch.assignment.BestFitPayloadStrategy@2205a05d ✔
+│  │  │  └─ [3] com.dronedispatch.assignment.LongestIdleStrategy@72ef8d15 ✔
+│  │  └─ longestIdleMaximizesWaitingTime() ✔
+│  ├─ PricingSelectorTest ✔
+│  │  ├─ contextsDelegateAndSwitchOnTheSameObject() ✔
+│  │  ├─ automaticRulesIncludeBoundariesAndPriority(int, int, String) ✔
+│  │  │  ├─ [1] 29, 2000, distance ✔
+│  │  │  ├─ [2] 29, 2001, payload ✔
+│  │  │  ├─ [3] 30, 2000, energy ✔
+│  │  │  ├─ [4] 30, 2001, energy ✔
+│  │  │  ├─ [5] 0, 1, distance ✔
+│  │  │  └─ [6] 100, 20000, energy ✔
+│  │  ├─ extendsManualAndAutomaticPoliciesWithoutEditingSelector() ✔
+│  │  └─ manualCanOverrideAutomaticSelection() ✔
+│  ├─ ModelValidationTest ✔
+│  │  ├─ droneRejectsInvalidBounds() ✔
+│  │  ├─ deliveryRejectsInvalidBounds() ✔
+│  │  └─ simulatedSourceIsDeterministic() ✔
+│  └─ PricingRegressionTest ✔
+│     ├─ rejectsUnknownMode() ✔
+│     ├─ preservesExactQuotes(String, int, int, long) ✔
+│     │  ├─ [1] distance, 10, 1500, 1700 ✔
+│     │  ├─ [2] payload, 10, 1500, 1200 ✔
+│     │  ├─ [3] energy, 10, 1500, 900 ✔
+│     │  ├─ [4] distance, 0, 1, 500 ✔
+│     │  ├─ [5] payload, 0, 1, 950 ✔
+│     │  ├─ [6] energy, 0, 1, 300 ✔
+│     │  ├─ [7] payload, 10, 1000, 950 ✔
+│     │  ├─ [8] payload, 10, 1001, 1200 ✔
+│     │  ├─ [9] distance, 1000, 20000, 120500 ✔
+│     │  ├─ [10] payload, 1000, 20000, 5700 ✔
+│     │  └─ [11] energy, 1000, 20000, 600300 ✔
+│     ├─ rejectsNullDelivery() ✔
+│     └─ rejectsNullWeather() ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 225 ms
+[        17 containers found      ]
+[         0 containers skipped    ]
+[        17 containers started    ]
+[         0 containers aborted    ]
+[        17 containers successful ]
+[         0 containers failed     ]
+[        57 tests found           ]
+[         0 tests skipped         ]
+[        57 tests started         ]
+[         0 tests aborted         ]
+[        57 tests successful      ]
+[         0 tests failed          ]
+

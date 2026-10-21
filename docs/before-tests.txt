@@ -1,0 +1,38 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+╷
+├─ JUnit Platform Suite ✔
+├─ JUnit Jupiter ✔
+│  └─ PricingRegressionTest ✔
+│     ├─ rejectsUnknownMode() ✔
+│     ├─ preservesExactQuotes(String, int, int, long) ✔
+│     │  ├─ [1] distance, 10, 1500, 1700 ✔
+│     │  ├─ [2] payload, 10, 1500, 1200 ✔
+│     │  ├─ [3] energy, 10, 1500, 900 ✔
+│     │  ├─ [4] distance, 0, 1, 500 ✔
+│     │  ├─ [5] payload, 0, 1, 950 ✔
+│     │  ├─ [6] energy, 0, 1, 300 ✔
+│     │  ├─ [7] payload, 10, 1000, 950 ✔
+│     │  ├─ [8] payload, 10, 1001, 1200 ✔
+│     │  ├─ [9] distance, 1000, 20000, 120500 ✔
+│     │  ├─ [10] payload, 1000, 20000, 5700 ✔
+│     │  └─ [11] energy, 1000, 20000, 600300 ✔
+│     ├─ rejectsNullDelivery() ✔
+│     └─ rejectsNullWeather() ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 135 ms
+[         5 containers found      ]
+[         0 containers skipped    ]
+[         5 containers started    ]
+[         0 containers aborted    ]
+[         5 containers successful ]
+[         0 containers failed     ]
+[        14 tests found           ]
+[         0 tests skipped         ]
+[        14 tests started         ]
+[         0 tests aborted         ]
+[        14 tests successful      ]
+[         0 tests failed          ]
+
